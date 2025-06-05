@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 class ChatBox extends StatefulWidget {
   const ChatBox({super.key});
 
@@ -16,7 +16,7 @@ class _ChatBoxState extends State<ChatBox> {
     super.dispose();
   }
 
-  void SendMessage(TextEditingController message) {
+  void SendMessage() async {
     String message = _messageController.text.trim();
     if (message.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -28,6 +28,10 @@ class _ChatBoxState extends State<ChatBox> {
       return;
     }
     _messageController.clear();
+
+    final auth = firebase_auth.FirebaseAuth.instance.currentUser;
+    
+
     //upload logic to firebase firestore
   }
 
@@ -48,7 +52,7 @@ class _ChatBoxState extends State<ChatBox> {
           ),
           IconButton(
               onPressed: () {
-                SendMessage(_messageController);
+                SendMessage();
               },
               icon: Icon(
                 Icons.send,
