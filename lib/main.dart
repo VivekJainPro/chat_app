@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         }
         else if(snapshot.hasError){
           return const Center(child: Text("Something went wrong!"),);
-        }
+        } 
         if(snapshot.hasData){
           return ChatScreen();
         }

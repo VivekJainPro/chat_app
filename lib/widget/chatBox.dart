@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth/firebase_auth.dart';
+
+final db = FirebaseFirestore.instance;
+
 class ChatBox extends StatefulWidget {
   const ChatBox({super.key});
 
@@ -10,11 +14,12 @@ class ChatBox extends StatefulWidget {
 class _ChatBoxState extends State<ChatBox> {
   final TextEditingController _messageController = TextEditingController();
 
-
   void dispose() {
     _messageController.dispose();
     super.dispose();
   }
+
+ 
 
   void SendMessage() async {
     String message = _messageController.text.trim();
@@ -29,8 +34,19 @@ class _ChatBoxState extends State<ChatBox> {
     }
     _messageController.clear();
 
-    final auth = firebase_auth.FirebaseAuth.instance.currentUser;
+    final user = FirebaseAuth.instance.currentUser!;
+    print("heres the user $user");
     
+    final userInfo = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+    
+    print("heres the userInfo ${userInfo.data()}");
+
+    db.collection('chats').add({
+      'chat': message,
+      'userId': user.uid,
+      'timestamp': Timestamp.now(),
+      'userImage': userInfo.data()!['image_url'] , // Use displayName or fallback to 'Anonymous'
+    });
 
     //upload logic to firebase firestore
   }
@@ -51,13 +67,14 @@ class _ChatBoxState extends State<ChatBox> {
             ),
           ),
           IconButton(
-              onPressed: () {
-                SendMessage();
-              },
-              icon: Icon(
-                Icons.send,
-                color: Theme.of(context).colorScheme.primary,
-              ),),
+            onPressed: () {
+              SendMessage();
+            },
+            icon: Icon(
+              Icons.send,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
         ],
       ),
     );

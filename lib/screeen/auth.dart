@@ -56,20 +56,27 @@ class _AuthScreenState extends State<AuthScreen> {
             .ref()
             .child('user_pfp')
             .child("${response.user!.uid}.jpg");
+
         await StorageRef.putFile(_pickedImage!);
 
         final uurl = await StorageRef.getDownloadURL();
-        print(uurl);
+      
 
-        final user = <String, dynamic>{
+        await  db.collection("users").doc(response.user!.uid).set({
           "email": _email,
           "username": _email.split('@')[0],
           "image_url": uurl,
-          "user_id": response.user!.uid,
-        };
+        });
 
-        db.collection("users").add(user).then((DocumentReference doc) =>
-            print('DocumentSnapshot added with ID: ${doc.id}'));
+        // final user = <String, dynamic>{
+        //   "email": _email,
+        //   "username": _email.split('@')[0],
+        //   "image_url": uurl,
+        //   "user_id": response.user!.uid,
+        // };
+
+        // db.collection("users").add(user).then((DocumentReference doc) =>
+        //     print('DocumentSnapshot added with ID: ${doc.id}'));
             
       }
     } on FirebaseAuthException catch (e) {
