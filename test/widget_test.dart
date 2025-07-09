@@ -12,7 +12,7 @@ import 'package:chat_app/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    setUpAll(() async {
+    setUp(() async {
       // Initialize Firebase before any tests run
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
