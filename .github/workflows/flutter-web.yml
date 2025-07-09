@@ -16,7 +16,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0'  # adjust to your Flutter version
+          flutter-version: '3.27.4'  # adjust to your Flutter version
 
       - name: Install dependencies
         run: flutter pub get
@@ -28,7 +28,7 @@ jobs:
         run: flutter build web --release
 
       - name: Deploy to Firebase Hosting
-        uses: w9jds/firebase-action@v13
+        uses: w9jds/firebase-action@v12
         with:
           args: deploy --only hosting
         env:
