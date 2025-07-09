@@ -21,6 +21,7 @@ class _AuthScreenState extends State<AuthScreen> {
   var _isLogin = true;
   var _password = "";
   var _email = "";
+  var _username = "";
   File? _pickedImage;
 
   void _onSubmit() async {
@@ -46,12 +47,12 @@ class _AuthScreenState extends State<AuthScreen> {
         final response = await _firebaseAuth.signInWithEmailAndPassword(
             email: _email, password: _password);
         print("heres the login responses $response ");
+        Navigator.of(context).pop();
       } else {
         final response = await _firebaseAuth.createUserWithEmailAndPassword(
             email: _email, password: _password);
-
         //use firebase firestore security rules to allow only authenticated users to write to the database or to make it more secure alllow only the user to write to their own document
-
+        Navigator.of(context).pop();
         final StorageRef = FirebaseStorage.instance
             .ref()
             .child('user_pfp')
@@ -61,10 +62,12 @@ class _AuthScreenState extends State<AuthScreen> {
 
         final uurl = await StorageRef.getDownloadURL();
       
-
-        await  db.collection("users").doc(response.user!.uid).set({
+        final user = FirebaseAuth.instance.currentUser!;
+        
+        await db.collection("users").doc(response.user!.uid).set({
+          "user_id": user.uid,
           "email": _email,
-          "username": _email.split('@')[0],
+          "username": _username,
           "image_url": uurl,
         });
 
@@ -158,6 +161,24 @@ class _AuthScreenState extends State<AuthScreen> {
                             _email = newValue!;
                           },
                         ),
+                        if (!_isLogin)
+                          TextFormField(
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary),
+                            decoration: InputDecoration(
+                              labelText: 'Username',
+                            ),
+                            
+                            validator: (value) {
+                              if (value == null || value.length < 4) {
+                                return "UserName must contain atleat 4 characters.";
+                              }
+                              return null;
+                            },
+                            onSaved: (newValue) {
+                              _username = newValue!;
+                            },
+                          ),
                         TextFormField(
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.primary),
@@ -175,6 +196,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             _password = newValue!;
                           },
                         ),
+                        
                         const SizedBox(height: 12),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -202,7 +224,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           child: Text(_isLogin
                               ? 'Create an account'
                               : 'I already have an account'),
-                        )
+                        ),
                       ],
                     ),
                   ),

@@ -14,6 +14,7 @@ class ChatBox extends StatefulWidget {
 class _ChatBoxState extends State<ChatBox> {
   final TextEditingController _messageController = TextEditingController();
 
+  @override
   void dispose() {
     _messageController.dispose();
     super.dispose();
@@ -41,14 +42,16 @@ class _ChatBoxState extends State<ChatBox> {
     
     print("heres the userInfo ${userInfo.data()}");
 
+    //upload logic to firebase firestore
     db.collection('chats').add({
+      'username': userInfo.data()!['username'],
       'chat': message,
       'userId': user.uid,
       'timestamp': Timestamp.now(),
       'userImage': userInfo.data()!['image_url'] , // Use displayName or fallback to 'Anonymous'
     });
 
-    //upload logic to firebase firestore
+    
   }
 
   @override
@@ -56,10 +59,18 @@ class _ChatBoxState extends State<ChatBox> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       child: Row(
+        
         children: [
           Expanded(
+          
             child: TextField(
+              
               decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                filled: true,
+                fillColor: Theme.of(context).colorScheme.primary.withAlpha(30),
                 hintText: 'Type a message',
               ),
               controller: _messageController,
@@ -67,12 +78,13 @@ class _ChatBoxState extends State<ChatBox> {
             ),
           ),
           IconButton(
+          
             onPressed: () {
               SendMessage();
             },
             icon: Icon(
               Icons.send,
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.primary.withGreen(255),
             ),
           ),
         ],

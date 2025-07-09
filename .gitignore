@@ -1,48 +1,51 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
-
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
+# Flutter/Dart specific
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
+.packages
+.metadata
 
-# Symbolication related
-app.*.symbols
+# Build output
+build/
+ios/Flutter/Flutter.framework/
+ios/Flutter/Flutter.podspec
+ios/ServiceDefinitions.json
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/Runner/GeneratedPluginRegistrant.*
 
-# Obfuscation related
-app.*.map.json
+# IDE and editor settings
+.idea/
+.vscode/
+*.iml
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-lib/firebase_options.dart
+# Platform folders you don't need to commit for web-only
+android/
+ios/
+macos/
+windows/
+linux/
 
-#wireless debugging :
+# Node.js
+node_modules/
+
+# Firebase functions build artifacts
+functions/node_modules/
+functions/lib/
+functions/.firebase/
+
+# Generated files
+.flutter-plugins
+flutter-plugins
+*.log
+
+# Packages lock files (optional — keep package-lock.json if your functions depend on it)
+# package-lock.json
+
+# Personal config or local environment files
+firebase-debug.log
+
+# You can keep these explicitly
+!pubspec.yaml
+!pubspec.lock
+!analysis_options.yaml

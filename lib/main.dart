@@ -1,4 +1,5 @@
-import 'package:chat_app/screeen/chat.dart';
+// import 'package:chat_app/screeen/chat.dart';
+import 'package:chat_app/screeen/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,7 +34,9 @@ class MyApp extends StatelessWidget {
           return const Center(child: Text("Something went wrong!"),);
         } 
         if(snapshot.hasData){
-          return ChatScreen();
+          // Navigator.of(context).pop();
+          return HomePage();
+          
         }
         else{
           return AuthScreen();
