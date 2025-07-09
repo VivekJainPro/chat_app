@@ -14,8 +14,9 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     setUp(() async {
       // Initialize Firebase before any tests run
-      WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp();
+      WidgetsFlutterBinding.ensureInitialized();
+      
     });
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
