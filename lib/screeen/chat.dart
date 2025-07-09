@@ -18,11 +18,11 @@ class _ChatScreenState extends State<ChatScreen> {
   void pushNotificationManager() async{
     final fcm = FirebaseMessaging.instance;
     fcm.requestPermission();
-    final token  = await fcm.getToken();
+    // final token  = await fcm.getToken();
     
-    print("Push Notification Manager Initialized, token: $token");
+    // print("Push Notification Manager Initialized, token: $token");
 
-    fcm.subscribeToTopic("chat");
+    // fcm.subscribeToTopic("chat");
 
     // To be notified whenever the token is updated, subscribe to the onTokenRefresh stream:
 

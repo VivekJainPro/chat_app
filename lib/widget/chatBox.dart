@@ -20,8 +20,6 @@ class _ChatBoxState extends State<ChatBox> {
     super.dispose();
   }
 
- 
-
   void SendMessage() async {
     String message = _messageController.text.trim();
     if (message.isEmpty) {
@@ -37,9 +35,12 @@ class _ChatBoxState extends State<ChatBox> {
 
     final user = FirebaseAuth.instance.currentUser!;
     print("heres the user $user");
-    
-    final userInfo = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
-    
+
+    final userInfo = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
+
     print("heres the userInfo ${userInfo.data()}");
 
     //upload logic to firebase firestore
@@ -48,10 +49,9 @@ class _ChatBoxState extends State<ChatBox> {
       'chat': message,
       'userId': user.uid,
       'timestamp': Timestamp.now(),
-      'userImage': userInfo.data()!['image_url'] , // Use displayName or fallback to 'Anonymous'
+      'userImage': userInfo
+          .data()!['image_url'], // Use displayName or fallback to 'Anonymous'
     });
-
-    
   }
 
   @override
@@ -59,12 +59,9 @@ class _ChatBoxState extends State<ChatBox> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       child: Row(
-        
         children: [
           Expanded(
-          
             child: TextField(
-              
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -75,10 +72,12 @@ class _ChatBoxState extends State<ChatBox> {
               ),
               controller: _messageController,
               textCapitalization: TextCapitalization.sentences,
+              onSubmitted: (string) {
+                SendMessage();
+              },
             ),
           ),
           IconButton(
-          
             onPressed: () {
               SendMessage();
             },
