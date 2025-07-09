@@ -32,7 +32,7 @@ node_modules/
 # Firebase functions build artifacts
 functions/node_modules/
 functions/lib/
-functions/.firebase/
+# functions/.firebase/
 
 # Generated files
 .flutter-plugins
@@ -40,7 +40,7 @@ flutter-plugins
 *.log
 
 # Packages lock files (optional — keep package-lock.json if your functions depend on it)
-# package-lock.json
+package-lock.json
 
 # Personal config or local environment files
 firebase-debug.log
