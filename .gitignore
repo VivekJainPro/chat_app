@@ -26,26 +26,27 @@ macos/
 windows/
 linux/
 
-# Node.js
+# Node.js global
 node_modules/
 
-# Firebase functions build artifacts
+# Firebase functions build artifacts (but NOT source!)
 functions/node_modules/
 functions/lib/
 # functions/.firebase/
 
 # Generated files
-.flutter-plugins
-flutter-plugins
 *.log
 
-# Packages lock files (optional — keep package-lock.json if your functions depend on it)
+# Packages lock files
 package-lock.json
 
 # Personal config or local environment files
 firebase-debug.log
 
-# You can keep these explicitly
+# Explicitly keep important files
 !pubspec.yaml
 !pubspec.lock
 !analysis_options.yaml
+!functions/package.json
+!functions/index.js
+!functions/src/
