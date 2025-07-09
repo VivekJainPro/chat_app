@@ -7,11 +7,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:chat_app/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    setUpAll(() async {
+      // Initialize Firebase before any tests run
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp();
+    });
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
