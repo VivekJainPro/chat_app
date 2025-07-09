@@ -11,13 +11,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:chat_app/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+
     setUp(() async {
       // Initialize Firebase before any tests run
       await Firebase.initializeApp();
       WidgetsFlutterBinding.ensureInitialized();
       
     });
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
