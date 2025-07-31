@@ -1,117 +1,29 @@
-# Enhanced CI/CD with multiple environments
-name: Flutter Web CI/CD Pipeline
+name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
-    branches: [ main, develop, staging ]
-  pull_request:
     branches: [ main ]
 
-env:
-  FLUTTER_VERSION: '3.16.0'
-
 jobs:
-  test:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    name: Test Flutter App
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: ${{ env.FLUTTER_VERSION }}
-        channel: 'stable'
-        cache: true
-        
-    - name: Get dependencies
-      run: flutter pub get
-      
-    - name: Analyze code
-      run: flutter analyze
-      
-    - name: Run tests
-      run: flutter test --coverage
-      
-    - name: Check formatting
-      run: dart format --output=none --set-exit-if-changed .
-      
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: coverage/lcov.info
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  build-staging:
-    needs: test
-    runs-on: ubuntu-latest
-    name: Build Staging
-    if: github.ref == 'refs/heads/develop'
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: ${{ env.FLUTTER_VERSION }}
-        channel: 'stable'
-        cache: true
-        
-    - name: Get dependencies
-      run: flutter pub get
-      
-    - name: Build staging web app
-      run: flutter build web --release --dart-define=ENVIRONMENT=staging
-      
-    - name: Deploy to staging
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/web
-        destination_dir: staging
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
 
-  build-production:
-    needs: test
-    runs-on: ubuntu-latest
-    name: Build Production
-    if: github.ref == 'refs/heads/main'
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: ${{ env.FLUTTER_VERSION }}
-        channel: 'stable'
-        cache: true
-        
-    - name: Get dependencies
-      run: flutter pub get
-      
-    - name: Build production web app
-      run: |
-        flutter build web --release \
-          --dart-define=ENVIRONMENT=production \
-          --web-renderer canvaskit \
-          --source-maps
-      
-    - name: Deploy to production
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/web
-        
-    - name: Create release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ github.run_number }}
-        release_name: Release v${{ github.run_number }}
-        draft: false
-        prerelease: false
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build web
+        run: flutter build web --release
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web

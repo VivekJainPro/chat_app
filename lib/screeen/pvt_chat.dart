@@ -51,7 +51,15 @@ class _PrivateChatScreenState extends State<PrivateChatScreen> {
   Future<String> uploadFile(PlatformFile file) async {
     final storageRef =
         FirebaseStorage.instance.ref().child('chat_files/${file.name}');
-    final uploadTask = await storageRef.putFile(File(file.path!));
+    UploadTask uploadTask;
+    if (file.bytes != null) {
+      // For web: upload from bytes
+      uploadTask = storageRef.putData(file.bytes!);
+    } else {
+      // For mobile/desktop: upload from file path
+      uploadTask = storageRef.putFile(File(file.path!));
+    }
+    await uploadTask;
     final downloadUrl = await storageRef.getDownloadURL();
     return downloadUrl;
   }
@@ -189,8 +197,6 @@ class _PrivateChatScreenState extends State<PrivateChatScreen> {
                 IconButton(
                   icon: Icon(Icons.send),
                   onPressed: () {
-                    
-
                     pushMessage();
                     setState(() {
                       downloadUrl = null;
