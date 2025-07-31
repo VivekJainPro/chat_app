@@ -22,6 +22,11 @@ jobs:
       - name: Build web
         run: flutter build web --release
 
+      - name: Set GitHub user
+        run: |
+          git config --global user.email "jainv.vek1975@gmail.com"
+          git config --global user.name "IamVivek"
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
