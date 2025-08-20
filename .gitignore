@@ -1,0 +1,59 @@
+# Flutter/Dart specific
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.metadata
+
+# Build output
+build/
+ios/Flutter/Flutter.framework/
+ios/Flutter/Flutter.podspec
+ios/ServiceDefinitions.json
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/Runner/GeneratedPluginRegistrant.*
+
+# IDE and editor settings
+.idea/
+.vscode/
+*.iml
+
+# Platform folders you don't need to commit for web-only
+android/
+ios/
+macos/
+windows/
+linux/
+
+# Node.js global
+node_modules/
+
+# Firebase functions build artifacts (but NOT source!)
+functions/node_modules/
+functions/lib/
+# functions/.firebase/
+
+# Generated files
+*.log
+
+# Packages lock files
+package-lock.json
+
+# Personal config or local environment files
+firebase-debug.log
+
+# Explicitly keep important files
+!pubspec.yaml
+!pubspec.lock
+!analysis_options.yaml
+!functions/package.json
+!functions/index.js
+!functions/src/
+
+# Firebase and env
+firebase.json
+.firebaserc
+.env
+lib/firebase_options.dart
+functions/.env
