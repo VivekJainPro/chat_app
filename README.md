@@ -1,22 +1,22 @@
 
 # Flutter Chat App
 
-A real-time chat application built with Flutter and Firebase, supporting both public and private messaging with file sharing capabilities. [main.dart (lines 24–25)](./lib/main.dart#L24-L25)
+A real-time chat application built with Flutter and Firebase, supporting both public and private messaging with file sharing capabilities. [1](./lib/main.dart#L24-L25)
  
 
 ## Features
 
-- **Real-time Authentication**: Firebase Authentication with automatic state management [main.dart (lines 30–44)](./lib/main.dart#L30-L44)
+- **Real-time Authentication**: Firebase Authentication with automatic state management [2](./lib/main.dart#L30-L44)
 
-- **Public Chat Rooms**: Group messaging functionality [homepage.dart (lines 86–89)](./lib/screeen/homepage.dart#L86-L89)
+- **Public Chat Rooms**: Group messaging functionality [3](./lib/screeen/homepage.dart#L86-L89)
 
-- **Private Messaging**: One-on-one conversations between users [homepage.dart (line 6)](./lib/screeen/homepage.dart#L6)
+- **Private Messaging**: One-on-one conversations between users [4](./lib/screeen/homepage.dart#L6)
 
-- **File Sharing**: Upload and share files in conversations [pvt_chat.dart (lines 51–65)](./lib/screeen/pvt_chat.dart#L51-L65)
+- **File Sharing**: Upload and share files in conversations [5](./lib/screeen/pvt_chat.dart#L51-L65)
 
-- **Web Deployment**: Optimized for web deployment on GitHub Pages [index.html (line 17)](./web/index.html#L17)
+- **Web Deployment**: Optimized for web deployment on GitHub Pages [6](./web/index.html#L17)
 
-- **Progressive Web App**: PWA capabilities for mobile web experience [widget_test.dart (lines 15–20)](./test/widget_test.dart#L15-L20)
+- **Progressive Web App**: PWA capabilities for mobile web experience [7](./test/widget_test.dart#L15-L20)
 
 
 ## Architecture
