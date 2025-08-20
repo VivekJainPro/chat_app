@@ -6,12 +6,18 @@ A real-time chat application built with Flutter and Firebase, supporting both pu
 
 ## Features
 
-- **Real-time Authentication**: Firebase Authentication with automatic state management [2](#0-1) 
-- **Public Chat Rooms**: Group messaging functionality [3](#0-2) 
-- **Private Messaging**: One-on-one conversations between users [4](#0-3) 
-- **File Sharing**: Upload and share files in conversations [5](#0-4) 
-- **Web Deployment**: Optimized for web deployment on GitHub Pages [6](#0-5) 
-- **Progressive Web App**: PWA capabilities for mobile web experience [7](#0-6) 
+- **Real-time Authentication**: Firebase Authentication with automatic state management [main.dart (lines 30–44)](./lib/main.dart#L30-L44)
+
+- **Public Chat Rooms**: Group messaging functionality [homepage.dart (lines 86–89)](./lib/screeen/homepage.dart#L86-L89)
+
+- **Private Messaging**: One-on-one conversations between users [homepage.dart (line 6)](./lib/screeen/homepage.dart#L6)
+
+- **File Sharing**: Upload and share files in conversations [pvt_chat.dart (lines 51–65)](./lib/screeen/pvt_chat.dart#L51-L65)
+
+- **Web Deployment**: Optimized for web deployment on GitHub Pages [index.html (line 17)](./web/index.html#L17)
+
+- **Progressive Web App**: PWA capabilities for mobile web experience [widget_test.dart (lines 15–20)](./test/widget_test.dart#L15-L20)
+
 
 ## Architecture
 
