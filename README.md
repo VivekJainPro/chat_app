@@ -23,9 +23,9 @@ A real-time chat application built with Flutter and Firebase, supporting both pu
 
 The application follows a layered architecture with Firebase integration:
 
-- **Entry Point**: `main.dart` initializes Firebase and handles authentication routing [8](#0-7) 
-- **Authentication Flow**: StreamBuilder-based routing between auth and main screens [9](#0-8) 
-- **Theme**: Dark theme with custom teal color scheme [10](#0-9) 
+- **Entry Point**: `main.dart` initializes Firebase and handles authentication routing [8](./lib/main.dart:9-16)
+- **Authentication Flow**: StreamBuilder-based routing between auth and main screens [9](./lib/main.dart:30-45) 
+- **Theme**: Dark theme with custom teal color scheme [10](./lib/main.dart:26-29) 
 
 ## Getting Started
 
@@ -44,7 +44,7 @@ The application follows a layered architecture with Firebase integration:
    ```
 3. Configure Firebase:
    - Add your `firebase_options.dart` configuration
-   - Set up CORS rules for web deployment [11](#0-10) 
+   - Set up CORS rules for web deployment 
 
 ### Running the App
 
@@ -59,13 +59,13 @@ flutter build web --base-href="/chat_app/"
 ## Web Deployment
 
 The app is configured for GitHub Pages deployment with:
-- Base href set to `/chat_app/` [6](#0-5) 
-- PWA manifest for mobile web app capabilities [12](#0-11) 
-- CORS configuration allowing requests from `vivekjainpro.github.io` [13](#0-12) 
+- Base href set to `/chat_app/` [11](./web/index.html:17) 
+- PWA manifest for mobile web app capabilities [12](./web/index.html:33) 
+- CORS configuration allowing requests from 
 
 ## Testing
 
-The project includes widget tests with Firebase integration: [14](#0-13) 
+The project includes widget tests with Firebase integration: [13](./test/widget_test.dart:15-20) 
 
 ```bash
 flutter test
@@ -97,5 +97,4 @@ web/
 ## Notes
 
 The application demonstrates a complete real-time chat solution with modern web deployment practices. The authentication system uses Firebase's `authStateChanges()` stream for automatic login state management, while the web deployment configuration ensures proper CORS handling for Firebase services. The codebase includes both public group chat and private messaging features with file sharing capabilities through Firebase Storage.
-
 
