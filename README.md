@@ -1,7 +1,8 @@
 
 # Flutter Chat App
 
-A real-time chat application built with Flutter and Firebase, supporting both public and private messaging with file sharing capabilities. [1](#0-0) 
+A real-time chat application built with Flutter and Firebase, supporting both public and private messaging with file sharing capabilities. [main.dart (lines 24–25)](./lib/main.dart#L24-L25)
+ 
 
 ## Features
 
